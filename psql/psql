@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ -t 0 ]; then
+    params=it
+else
+    # stdin working     
+    params=i
+fi
+
+docker run \
+-$params \
+--rm \
+--volume $HOME/Public:/public \
+--volume $HOME/.pgpass:/root/.pgpass \
+--volume $HOME/.psql_history:/root/.psql_history \
+nakonechniyd/psql \
+psql "$@"
+
