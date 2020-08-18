@@ -8,5 +8,5 @@ docker build --file pytools.dockerfile --build-arg USER_UID=$(id -u) --build-arg
 
 ## shell scripts
 ```
-copy ./bin/* $HOME/.local/bin/
+cp ./bin/* $HOME/.local/bin/
 ```
