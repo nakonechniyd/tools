@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ -t 0 ]; then
+    params=it
+else
+    # stdin working     
+    params=i
+fi
+
+docker run \
+-$params \
+--rm \
+--volume $PWD:$PWD:cached \
+--workdir $PWD \
+nakonechniyd/pytools:latest \
+"$@"
