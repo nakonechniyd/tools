@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+DIR=$HOME/Applications/pgadmin4
+
+if [ ! -d "$DIR" ]; then
+	echo "initializing ..."
+
+	mkdir --parents "$DIR"/home
+	mkdir --parents "$DIR"/pgadmin
+
+	echo "SERVER_MODE = False" > "$DIR"/config_local.py
+
+	echo "changing ownership ..."
+	sudo chown -R 5050:5050 "$DIR"
+fi
+
+echo "pulling image ..."
+echo "running container ..."
+
+docker run \
+--rm \
+--name pgadmin4 \
+--publish 5050:80 \
+--env PGADMIN_DEFAULT_EMAIL="user@example.com" \
+--env PGADMIN_DEFAULT_PASSWORD="postgres" \
+-v "$DIR"/home:/home/pgadmin/ \
+-v "$DIR"/pgadmin:/var/lib/pgadmin \
+-v "$DIR"/config_local.py:/pgadmin4/config_local.py \
+dpage/pgadmin4
