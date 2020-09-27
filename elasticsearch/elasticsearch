@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+VERSION=7.9.2
+DIR=$HOME/Applications/elasticsearch
+
+if [ ! -d "$DIR" ]; then
+	echo "initializing ..."
+
+	mkdir --parents "$DIR"
+fi
+
+echo "pulling image version $VERSION ..."
+echo "running docker container on http://localhost:9200/ ..."
+
+docker run \
+--rm \
+--name elasticsearch \
+--publish 9200:9200 \
+--publish 9300:9300 \
+--env "discovery.type=single-node" \
+-v "$DIR":/usr/share/elasticsearch/data \
+docker.elastic.co/elasticsearch/elasticsearch:$VERSION
