@@ -15,7 +15,7 @@ if [ ! -d "$DIR" ]; then
 fi
 
 echo "pulling image ..."
-echo "running container ..."
+echo "running docker container on http://localhost:5050/ ..."
 
 docker run \
 --rm \
